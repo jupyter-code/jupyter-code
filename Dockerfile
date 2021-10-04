@@ -1,9 +1,12 @@
 FROM jupyter/scipy-notebook
 USER root
-
-RUN sudo apt update && sudo apt install -y curl && \
-    rm -rf /var/lib/apt/lists/* && \
-    curl -fsSL https://code-server.dev/install.sh | sh
+ARG RELEASE_TAG=openvscode-server-v1.60.2
+RUN cd /tmp && \ 
+    wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.60.2/openvscode-server-v1.60.2-linux-x64.tar.gz && \
+    tar -xzf ${RELEASE_TAG}-linux-x64.tar.gz  && \
+    rm -f ${RELEASE_TAG}-linux-x64.tar.gz && \
+    mv ${RELEASE_TAG}-linux-x64 /opt/code-server && \
+    ln -s /opt/code-server/server.sh /usr/bin/code-server
 
 USER ${NB_USER}
 
