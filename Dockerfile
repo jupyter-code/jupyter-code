@@ -1,7 +1,7 @@
 FROM jupyter/scipy-notebook
 USER root
 
-RUN sudo apt update && sudo apt install -y curl && \
+RUN sudo apt update && sudo apt install -y curl jq && \
     rm -rf /var/lib/apt/lists/* && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
