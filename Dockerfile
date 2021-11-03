@@ -8,7 +8,7 @@ RUN sudo apt update && sudo apt install -y curl && \
 RUN  pip install --no-cache-dir otter-grader roboworld
 
 COPY scripts /opt/scripts
-RUN chmod 700 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
+RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 
 USER ${NB_USER}
 
