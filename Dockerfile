@@ -5,7 +5,7 @@ RUN sudo apt update && sudo apt install -y curl jq && \
     rm -rf /var/lib/apt/lists/* && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
-RUN  pip install --no-cache-dir otter-grader roboworld
+RUN  pip install --no-cache-dir otter-grader roboworld jupyterhub>=1.5.0
 
 COPY scripts /opt/scripts
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
