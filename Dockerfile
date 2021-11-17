@@ -15,5 +15,4 @@ RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 USER ${NB_USER}
 
 RUN jupyter labextension install @jupyterlab/git @jupyterlab/server-proxy && \
-    jupyter server extension enable --py jupyterlab_git jupyter_server_proxy
-
+    jupyter server extension enable --py jupyterlab_git jupyter_server_proxy livefeedback
