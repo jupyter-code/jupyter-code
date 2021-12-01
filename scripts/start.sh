@@ -29,7 +29,7 @@ fi
 if [ $INSTALLED_RELEASE -lt 2 ]; then
     curl -sfLO https://github.com/hm-riscv/vscode-riscv-venus/releases/download/v1.6.0/hm.riscv-venus-1.6.0.vsix
     code-server --install-extension ./hm.riscv-venus-1.6.0.vsix
-    code-server --install-extension /opt/zhwu95.riscv-0.0.8.vsix
+    code-server --install-extension /opt/extensions/zhwu95.riscv-0.0.8.vsix
     rm hm.riscv-venus-1.6.0.vsix
 fi
 
