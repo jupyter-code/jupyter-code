@@ -6,10 +6,12 @@ RUN sudo apt update && sudo apt install -y curl jq git && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
 ADD requirements.txt /tmp/requirements.txt
-RUN  pip install --no-cache-dir -r /tmp/requirements.txt && fix-permissions "${CONDA_DIR}" && \
+RUN  pip install --no-cache-dir -r /tmp/requirements.txt && \ 
+    fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 COPY scripts /opt/scripts
+COPY extensions /opt/extensions
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 
 USER ${NB_USER}

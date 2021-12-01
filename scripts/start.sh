@@ -1,7 +1,12 @@
 #!/bin/bash
-CURRENT_RELEASE="1"
+CURRENT_RELEASE="2"
 CODE_SETTINGS=~/.local/share/code-server/User/settings.json
-if [ ! -f  ~/.local/fingerprint ] || [ $(cat ~/.local/fingerprint) -lt $CURRENT_RELEASE ]; then
+INSTALLED_RELEASE="0"
+if [ -f  ~/.local/fingerprint ] ; then
+    INSTALLED_RELEASE=$(cat ~/.local/fingerprint)
+fi
+
+if [ $INSTALLED_RELEASE -lt 1 ]; then
     rm -rf ~/.local/share/code-server/CachedExtensionsVSIXs/
     rm -rf ~/.local/share/code-server/extensions/ms-python.python*/
     rm -rf ~/.local/share/code-server/extensions/ms-toolsai.jupyter*/
@@ -19,6 +24,13 @@ if [ ! -f  ~/.local/fingerprint ] || [ $(cat ~/.local/fingerprint) -lt $CURRENT_
     else
         jq -n "$SETTINGS" > $CODE_SETTINGS
     fi
+fi
+
+if [ $INSTALLED_RELEASE -lt 2 ]; then
+    curl -sfLO https://github.com/hm-riscv/vscode-riscv-venus/releases/download/v1.6.0/hm.riscv-venus-1.6.0.vsix
+    code-server --install-extension ./hm.riscv-venus-1.6.0.vsix
+    code-server --install-extension /opt/zhwu95.riscv-0.0.8.vsix
+    rm hm.riscv-venus-1.6.0.vsix
 fi
 
 echo "$CURRENT_RELEASE" > ~/.local/fingerprint
