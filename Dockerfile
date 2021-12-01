@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:2021-11-16
+FROM jupyter/scipy-notebook:2021-11-20
 USER root
 
 RUN sudo apt update && sudo apt install -y curl jq git && \
