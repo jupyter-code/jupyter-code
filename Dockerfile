@@ -1,14 +1,15 @@
 FROM jupyter/scipy-notebook:2021-11-20
 USER root
 
-RUN sudo apt update && sudo apt install -y curl jq git && \
+RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra && \
     rm -rf /var/lib/apt/lists/* && \
     curl -fsSL https://code-server.dev/install.sh | sh
 
 ADD requirements.txt /tmp/requirements.txt
-RUN  pip install --no-cache-dir -r /tmp/requirements.txt && \ 
+RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
+    cp /opt/conda/lib/python3.9/site-packages/nbgitpuller/templates/status.html /opt/conda/lib/python3.9/site-packages/notebook/templates/status.html && \ 
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
+    fix-permissions "/home/${NB_USER}" 
 
 COPY scripts /opt/scripts
 COPY extensions /opt/extensions
