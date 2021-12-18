@@ -1,9 +1,12 @@
 FROM jupyter/scipy-notebook:2021-12-16
 USER root
 
-RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra && \
+ADD code-server*.deb /tmp/
+
+RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
     rm -rf /var/lib/apt/lists/* && \
-    curl -fsSL https://code-server.dev/install.sh | sh
+    dpkg -i /tmp/code-server*.deb && \
+    rm -rf /tmp/*
 
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
