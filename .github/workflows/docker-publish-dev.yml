@@ -46,12 +46,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Download artifacts from code-server
-        run: |
-          wget --quiet --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/coder/code-server/actions/artifacts/128279582/zip -O /tmp/release-package.zip
-          unzip /tmp/release-package.zip -d /tmp
-          cp /tmp/code-server*_amd64.deb .
-
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
@@ -61,3 +55,5 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          secrets: |
+            "github_token=${{ secrets.GITHUB_TOKEN }}"
