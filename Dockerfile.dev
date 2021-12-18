@@ -1,12 +1,13 @@
 FROM jupyter/scipy-notebook:2021-12-16
 USER root
 
-RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
-    rm -rf /var/lib/apt/lists/* && \
-    wget --header 'authorization: Bearer $(cat /run/secrets/github_token)' https://api.github.com/repos/coder/code-server/actions/artifacts/128279582/zip -O /tmp/release-package.zip && \
+RUN --mount=type=secret,id=github_token \
+    TOKEN=$(cat /run/secrets/github_token) wget --header 'authorization: Bearer $TOKEN' https://api.github.com/repos/coder/code-server/actions/artifacts/128279582/zip -O /tmp/release-package.zip && \
     unzip /tmp/release-package.zip -d /tmp && \
     dpkg -i /tmp/code-server_*_amd64.deb && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
+    rm -rf /var/lib/apt/lists/* 
 
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
