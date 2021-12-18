@@ -2,7 +2,8 @@ FROM jupyter/scipy-notebook:2021-12-16
 USER root
 
 RUN --mount=type=secret,id=github_token \
-    TOKEN=$(cat /run/secrets/github_token) wget --header 'authorization: Bearer $TOKEN' https://api.github.com/repos/coder/code-server/actions/artifacts/128279582/zip -O /tmp/release-package.zip && \
+    TOKEN=$(cat /run/secrets/github_token) && \
+    wget --header "authorization: Bearer $TOKEN" https://api.github.com/repos/coder/code-server/actions/artifacts/128279582/zip -O /tmp/release-package.zip && \
     unzip /tmp/release-package.zip -d /tmp && \
     dpkg -i /tmp/code-server_*_amd64.deb && \
     rm -rf /tmp/* && \
