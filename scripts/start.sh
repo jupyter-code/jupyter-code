@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 install_jupyter (){
     rm -rf ~/.local/share/code-server/CachedExtensionsVSIXs/
     rm -rf ~/.local/share/code-server/extensions/ms-python.python*/
@@ -11,10 +10,9 @@ install_jupyter (){
     code-server --install-extension ./ms-python.python-2021.12.1559732655.vsix
     rm ms-toolsai.jupyter-2021.11.1001552333.vsix
     rm ms-python.python-2021.12.1559732655.vsix
-    sed -i 's/"activationEvents": \[/"enabledApiProposals": [\n\t\t"notebookConcatTextDocument",\n\t\t"notebookControllerKind",\n\t\t"notebookDebugOptions",\n\t\t"notebookDeprecated",\n\t\t"notebookEditor",\n\t\t"notebookEditorDecorationType",\n\t\t"notebookEditorEdit",\n\t\t"notebookMessaging",\n\t\t"notebookMime",\n\t\t"notebookCellExecutionState",\n\t\t"portsAttributes",\n\t\t"textDocumentNotebook",\n\t\t"quickPickSortByLabel"\n\t],\n\t"activationEvents": [/g' ~/.local/share/code-server/extensions/ms-toolsai.jupyter-2021.11.1001552333/package.json
-}   
+}
 
-CURRENT_RELEASE="2"
+CURRENT_RELEASE="3"
 CODE_SETTINGS=~/.local/share/code-server/User/settings.json
 INSTALLED_RELEASE="0"
 if [ -f  ~/.local/fingerprint ] ; then
@@ -24,7 +22,7 @@ fi
 if [ $INSTALLED_RELEASE -lt 1 ]; then
     install_jupyter
     SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false"
-    if [ -e $CODE_SETTINGS ] 
+    if [ -e $CODE_SETTINGS ]
     then
         cat $CODE_SETTINGS | jq "$SETTINGS" > $CODE_SETTINGS.tmp
         mv $CODE_SETTINGS.tmp $CODE_SETTINGS
