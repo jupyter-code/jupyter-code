@@ -1,11 +1,12 @@
 #!/bin/bash
+set -e
 
 install_jupyter (){
     rm -rf ~/.local/share/code-server/CachedExtensionsVSIXs/
     rm -rf ~/.local/share/code-server/extensions/ms-python.python*/
     rm -rf ~/.local/share/code-server/extensions/ms-toolsai.jupyter*/
-    curl -sfLO https://open-vsx.org/api/ms-toolsai/jupyter/2021.11.1001552333/file/ms-toolsai.jupyter-2021.11.1001552333.vsix
-    curl -sfLO https://open-vsx.org/api/ms-python/python/2021.12.1559732655/file/ms-python.python-2021.12.1559732655.vsix
+    curl --connect-timeout 5 -sfLO https://open-vsx.org/api/ms-toolsai/jupyter/2021.11.1001552333/file/ms-toolsai.jupyter-2021.11.1001552333.vsix
+    curl --connect-timeout 5 -sfLO https://open-vsx.org/api/ms-python/python/2021.12.1559732655/file/ms-python.python-2021.12.1559732655.vsix
     code-server --install-extension ./ms-toolsai.jupyter-2021.11.1001552333.vsix
     code-server --install-extension ./ms-python.python-2021.12.1559732655.vsix
     rm ms-toolsai.jupyter-2021.11.1001552333.vsix

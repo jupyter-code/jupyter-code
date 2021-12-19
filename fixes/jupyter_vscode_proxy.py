@@ -7,7 +7,7 @@ def setup_vscode():
         executable = "code-server"
         if not shutil.which(executable):
             raise FileNotFoundError("Can not find code-server in PATH")
-            
+
         cmd = [
             executable,
             "--auth",
@@ -24,9 +24,6 @@ def setup_vscode():
         "launcher_entry": {
             "title": "VS Code",
             "path_info": "vscode/?folder=" + os.path.abspath(os.getcwd()),
-            "icon_path": os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), "icons", "vscode.svg"
-            ),
+            "icon_path": os.path.join(os.path.dirname(os.path.abspath(__file__)), "icons", "vscode.svg"),
         },
     }
-
