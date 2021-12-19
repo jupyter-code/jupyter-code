@@ -21,12 +21,13 @@ fi
 
 if [ $INSTALLED_RELEASE -lt 1 ]; then
     install_jupyter
-    SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false"
-    if [ -e $CODE_SETTINGS ]
+    SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false | .\"python.defaultInterpreterPath\" = \"/opt/conda/bin/python\""
+    if [ -e $CODE_SETTINGS ] 
     then
         cat $CODE_SETTINGS | jq "$SETTINGS" > $CODE_SETTINGS.tmp
         mv $CODE_SETTINGS.tmp $CODE_SETTINGS
     else
+        mkdir -p ~/.local/share/code-server/User
         jq -n "$SETTINGS" > $CODE_SETTINGS
     fi
 fi
