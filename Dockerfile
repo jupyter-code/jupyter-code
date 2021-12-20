@@ -17,7 +17,7 @@ RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
     fix-permissions "/home/${NB_USER}" 
 
 COPY scripts /opt/scripts
-COPY extensions /opt/extensions
+
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 
 # Taken from the official haskell docker container
