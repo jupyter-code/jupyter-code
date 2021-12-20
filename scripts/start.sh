@@ -10,6 +10,7 @@ fi
 
 if [ $INSTALLED_RELEASE -lt 1 ]; then
     code-server --install-extension haskell.haskell
+    mkdir -p /home/jovyan/.local/share/code-server/User/globalStorage/haskell.haskell
     SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false"
     if [ -e $CODE_SETTINGS ] 
     then
