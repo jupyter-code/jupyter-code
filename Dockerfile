@@ -7,7 +7,7 @@ RUN --mount=type=secret,id=github_token \
     unzip /tmp/release-package.zip -d /tmp && \
     dpkg -i /tmp/code-server_*_amd64.deb && \
     rm -rf /tmp/* && \
-    sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
+    sudo apt update && sudo apt install -y build-essential curl libffi7 libgmp10 libncurses-dev libncurses5 libtinfo5 g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg netbase jq git make texlive-fonts-extra direnv && \
     rm -rf /var/lib/apt/lists/* 
 
 ADD requirements.txt /tmp/requirements.txt
