@@ -71,8 +71,6 @@ RUN cd /tmp && \
     gpg --batch --trusted-key 575159689BEFB442 --verify stack.tar.gz.asc stack.tar.gz && \
     echo "$STACK_RELEASE_SHA256 stack.tar.gz" | sha256sum --strict --check && \
     tar -xf stack.tar.gz -C /usr/local/bin --strip-components=1 stack-$STACK-linux-x86_64/stack && \
-    /usr/local/bin/stack config set system-ghc --global true && \
-    /usr/local/bin/stack config set install-ghc --global false && \
     rm -rf "$GNUPGHOME" /var/lib/apt/lists/* /tmp/*
     
 USER ${NB_USER}
