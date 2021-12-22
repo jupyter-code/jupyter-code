@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:2021-12-15
+FROM jupyter/scipy-notebook:2021-12-21
 USER root
 
 RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
