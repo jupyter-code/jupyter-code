@@ -1,9 +1,9 @@
-FROM jupyter/scipy-notebook:2021-12-16
+FROM jupyter/scipy-notebook:2022-01-03
 USER root
 
 RUN --mount=type=secret,id=github_token \
     TOKEN=$(cat /run/secrets/github_token) && \
-    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/fritterhoff/code-server/actions/artifacts/128579498/zip -O /tmp/release-package.zip && \
+    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/coder/code-server/actions/artifacts/136655469/zip -O /tmp/release-package.zip && \
     unzip /tmp/release-package.zip -d /tmp && \
     dpkg -i /tmp/code-server_*_amd64.deb && \
     rm -rf /tmp/* && \
