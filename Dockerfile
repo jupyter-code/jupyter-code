@@ -1,12 +1,7 @@
 FROM jupyter/scipy-notebook:2022-01-03
 USER root
 
-RUN --mount=type=secret,id=github_token \
-    TOKEN=$(cat /run/secrets/github_token) && \
-    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/fritterhoff/code-server/actions/artifacts/137067406/zip -O /tmp/release-package.zip && \
-    unzip /tmp/release-package.zip -d /tmp && \
-    dpkg -i /tmp/code-server_*_amd64.deb && \
-    rm -rf /tmp/* && \
+RUN curl -fsSL https://code-server.dev/install.sh | sh && \
     sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
     rm -rf /var/lib/apt/lists/* 
 
