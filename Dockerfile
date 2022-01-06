@@ -1,8 +1,8 @@
 FROM jupyter/scipy-notebook:2022-01-03
 USER root
 
-RUN curl -fsSL https://code-server.dev/install.sh | sh && \
-    sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
+RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
+    curl -fsSL https://code-server.dev/install.sh | sh && \
     rm -rf /var/lib/apt/lists/* 
 
 ADD requirements.txt /tmp/requirements.txt
