@@ -1,14 +1,15 @@
-FROM jupyter/scipy-notebook:2021-12-16
+FROM jupyter/scipy-notebook:2022-01-03
 USER root
 
-RUN --mount=type=secret,id=github_token \
-    TOKEN=$(cat /run/secrets/github_token) && \
-    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/fritterhoff/code-server/actions/artifacts/128579498/zip -O /tmp/release-package.zip && \
-    unzip /tmp/release-package.zip -d /tmp && \
-    dpkg -i /tmp/code-server_*_amd64.deb && \
-    rm -rf /tmp/* && \
-    sudo apt update && sudo apt install -y build-essential curl libffi7 libgmp10 libncurses-dev libncurses5 libtinfo5 g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg netbase jq git make texlive-fonts-extra direnv && \
+RUN sudo apt update && sudo apt install -y build-essential curl libffi7 libgmp10 libncurses-dev libncurses5 libtinfo5 g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg netbase jq git make texlive-fonts-extra direnv && \
+    curl -fsSL https://code-server.dev/install.sh | sh && \
     rm -rf /var/lib/apt/lists/* 
+
+RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens  && \
+    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-* && mkdir -m 1777 tmp 
+
 
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
