@@ -1,9 +1,15 @@
-FROM jupyter/scipy-notebook:2021-12-15
+FROM jupyter/scipy-notebook:2022-01-03
 USER root
 
 RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra direnv && \
-    rm -rf /var/lib/apt/lists/* && \
-    curl -fsSL https://code-server.dev/install.sh | sh
+    curl -fsSL https://code-server.dev/install.sh | sh && \
+    rm -rf /var/lib/apt/lists/* 
+
+RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens  && \
+    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-* && mkdir -m 1777 tmp 
+
 
 ADD requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt && \
@@ -16,6 +22,6 @@ COPY extensions /opt/extensions
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 
 USER ${NB_USER}
-
+ADD fixes/jupyter_vscode_proxy.py /opt/conda/lib/python3.9/site-packages/jupyter_vscode_proxy/__init__.py
 RUN jupyter labextension install @jupyterlab/git @jupyterlab/server-proxy && \
     jupyter server extension enable --py jupyterlab_git jupyter_server_proxy livefeedback
