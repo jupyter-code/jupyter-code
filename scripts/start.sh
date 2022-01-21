@@ -1,16 +1,10 @@
 #!/bin/bash
 set -e
 
-install_jupyter (){
+uninstall_jupyter (){
     rm -rf ~/.local/share/code-server/CachedExtensionsVSIXs/
     rm -rf ~/.local/share/code-server/extensions/ms-python.python*/
     rm -rf ~/.local/share/code-server/extensions/ms-toolsai.jupyter*/
-    curl --connect-timeout 5 -sfLO https://open-vsx.org/api/ms-toolsai/jupyter/2021.11.1001552333/file/ms-toolsai.jupyter-2021.11.1001552333.vsix
-    curl --connect-timeout 5 -sfLO https://open-vsx.org/api/ms-python/python/2021.12.1559732655/file/ms-python.python-2021.12.1559732655.vsix
-    code-server --install-extension ./ms-toolsai.jupyter-2021.11.1001552333.vsix
-    code-server --install-extension ./ms-python.python-2021.12.1559732655.vsix
-    rm ms-toolsai.jupyter-2021.11.1001552333.vsix
-    rm ms-python.python-2021.12.1559732655.vsix
 }
 
 CURRENT_RELEASE="3"
@@ -21,7 +15,6 @@ if [ -f  ~/.local/fingerprint ] ; then
 fi
 
 if [ $INSTALLED_RELEASE -lt 1 ]; then
-    install_jupyter
     SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false | .\"python.defaultInterpreterPath\" = \"/opt/conda/bin/python\""
     if [ -e $CODE_SETTINGS ] 
     then
@@ -42,7 +35,7 @@ fi
 
 # Check that the installed release is less than 2 and not 0
 if [ $INSTALLED_RELEASE -lt 3 ] && [ $INSTALLED_RELEASE -ne 0 ]; then
-    install_jupyter
+    uninstall_jupyter
 fi
 
 echo "$CURRENT_RELEASE" > ~/.local/fingerprint
