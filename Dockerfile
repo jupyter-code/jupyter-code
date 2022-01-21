@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:2022-01-03
+FROM jupyter/scipy-notebook:2022-01-21
 USER root
 
 RUN sudo apt update && sudo apt install -y build-essential curl libffi7 libgmp10 libncurses-dev libncurses5 libtinfo5 g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg netbase jq git make texlive-fonts-extra direnv && \
