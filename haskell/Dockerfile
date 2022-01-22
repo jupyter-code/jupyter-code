@@ -63,7 +63,7 @@ RUN cd /tmp && \
     tar -xf stack.tar.gz -C /usr/local/bin --strip-components=1 stack-$STACK-linux-x86_64/stack && \
     rm -rf "$GNUPGHOME" /var/lib/apt/lists/* /tmp/*
     
-COPY scripts /opt/scripts
+COPY scripts/start.sh /opt/scripts/start.sh
 
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 

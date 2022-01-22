@@ -14,7 +14,7 @@ ENV PATH ${PATH}:/opt/rust/cargo/bin
 RUN RUSTUP_HOME=/opt/rust/rustup CARGO_HOME=/opt/rust/cargo rustup update && \
     RUSTUP_HOME=/opt/rust/rustup CARGO_HOME=/opt/rust/cargo rustup component add rls rust-analysis rust-src
 
-COPY scripts /opt/scripts
+COPY scripts/start.sh /opt/scripts/start.sh
 
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 
