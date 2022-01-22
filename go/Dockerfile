@@ -1,5 +1,9 @@
-FROM ghcr.io/jupyter-code/jupyter-code
+ARG TAG=latest
+
+FROM ghcr.io/jupyter-code/jupyter-code:$TAG
+
 USER root
+
 RUN sudo apt update && sudo apt install curl build-essential gcc make -y && \
     cd /tmp && \
     # install go 

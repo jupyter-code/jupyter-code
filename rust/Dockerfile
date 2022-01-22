@@ -1,5 +1,8 @@
-FROM ghcr.io/jupyter-code/jupyter-code
+ARG TAG=latest
+FROM ghcr.io/jupyter-code/jupyter-code:$TAG
+
 USER root
+
 RUN sudo apt update && sudo apt install curl build-essential gcc make -y && \
     rm -rf /var/lib/apt/lists/* && \
     export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \

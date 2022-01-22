@@ -1,5 +1,9 @@
-FROM ghcr.io/jupyter-code/jupyter-code
+ARG TAG=latest
+
+FROM ghcr.io/jupyter-code/jupyter-code:$TAG
+
 USER root
+
 RUN sudo apt update && sudo apt install -y build-essential curl libffi7 libgmp10 libncurses-dev libncurses5 libtinfo5 g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg netbase jq git make texlive-fonts-extra direnv && \
     rm -rf /var/lib/apt/lists/* && \
     export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
