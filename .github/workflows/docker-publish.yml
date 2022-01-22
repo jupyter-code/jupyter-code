@@ -63,14 +63,13 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile
           context: base
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   
   build-childs:
-
+    needs: [ build-base ]
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -116,7 +115,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          file: Dockerfile
           context: ${{ matrix.child }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
