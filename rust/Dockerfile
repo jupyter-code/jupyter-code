@@ -8,9 +8,9 @@ RUN sudo apt update && sudo apt install curl build-essential gcc make pkg-config
     export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension rust-lang.rust && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension  bungcip.better-toml && \
-    rm -rf ~/.cache/ && \
-    rm -rf ~/.local/share/code-server/CachedExtensionVSIXs
-    
+    rm -rf /home/jovyan/.cache/ && \
+    rm -rf /home/jovyan/.local/share/code-server/CachedExtensionVSIXs
+
 RUN curl https://sh.rustup.rs -sSf | sudo env RUSTUP_HOME=/opt/rust/rustup CARGO_HOME=/opt/rust/cargo sh -s -- --default-toolchain stable --profile default --no-modify-path -y
 
 ENV PATH ${PATH}:/opt/rust/cargo/bin

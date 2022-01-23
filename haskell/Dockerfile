@@ -8,8 +8,8 @@ RUN sudo apt update && sudo apt install -y build-essential curl libffi7 libgmp10
     rm -rf /var/lib/apt/lists/* && \
     export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension haskell.haskell && \
-    rm -rf ~/.cache/ && \
-    rm -rf ~/.local/share/code-server/CachedExtensionVSIXs
+    rm -rf /home/jovyan/.cache/ && \
+    rm -rf /home/jovyan/.local/share/code-server/CachedExtensionVSIXs
 
 
 # Taken from the official haskell docker container
