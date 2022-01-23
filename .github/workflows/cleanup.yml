@@ -1,0 +1,20 @@
+name: Cleanup old versions
+on:
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+    - uses: snok/container-retention-policy@v1
+      with:
+        image-names: jupyter-code, jupyter-code-haskell, jupyter-code-rust, jupyter-code-go
+        cut-off: Two hours ago UTC
+        timestamp-to-use: updated_at
+        account-type: org
+        org-name: jupyter-code
+        untagged-only: true
+        token: ${{ secrets.GITHUB_TOKEN }}
