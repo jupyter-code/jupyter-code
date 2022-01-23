@@ -17,4 +17,4 @@ jobs:
         account-type: org
         org-name: jupyter-code
         untagged-only: true
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.DOCKER_PAT }}
