@@ -3,5 +3,5 @@ roboworld==0.1.0
 https://github.com/fritterhoff/livefeedback/archive/refs/heads/main.zip
 jupyter-vscode-proxy==0.1
 jupyterlab-git==0.34.2
-jupyter-server-proxy==3.2.0
+jupyter-server-proxy==3.2.1
 nbgitpuller==1.0.2
