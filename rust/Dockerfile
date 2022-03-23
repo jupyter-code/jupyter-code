@@ -5,7 +5,7 @@ USER root
 
 RUN sudo apt update && sudo apt install curl build-essential gcc make pkg-config libssl-dev -y && \
     rm -rf /var/lib/apt/lists/* && \
-    export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
+    export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/lib/vscode/extensions && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension rust-lang.rust && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension  bungcip.better-toml && \
     rm -rf /home/jovyan/.cache/ && \

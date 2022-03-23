@@ -6,8 +6,8 @@ RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra 
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /home/jovyan/.cache/
 
-RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
-    mkdir -p ${CODE_BUILTIN_EXTENSIONS_DIR} && \
+RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/lib/vscode/extensions && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-toolsai.jupyter && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens  && \
     cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-* && mkdir -m 1777 tmp && \
