@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:2022-02-28
+FROM jupyter/scipy-notebook:2022-03-21
 USER root
 
 RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra latexmk texlive-lang-german texlive-science direnv && \
@@ -7,6 +7,7 @@ RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra 
     rm -rf /home/jovyan/.cache/
 
 RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/vendor/modules/code-oss-dev/extensions && \
+    mkdir -p ${CODE_BUILTIN_EXTENSIONS_DIR} && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens  && \
     cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-* && mkdir -m 1777 tmp && \
