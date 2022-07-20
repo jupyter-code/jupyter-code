@@ -6,16 +6,12 @@ uninstall_jupyter (){
     rm -rf ~/.local/share/code-server/extensions/ms-python.python*/
     rm -rf ~/.local/share/code-server/extensions/ms-toolsai.jupyter*/
 }
-
-CURRENT_RELEASE="4"
+CURRENT_RELEASE="5"
 CODE_SETTINGS=~/.local/share/code-server/User/settings.json
 INSTALLED_RELEASE="0"
-if [ -f  ~/.local/fingerprint ] ; then
-    INSTALLED_RELEASE=$(cat ~/.local/fingerprint)
-fi
 
-if [ $INSTALLED_RELEASE -lt 1 ]; then
-    SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false | .\"python.defaultInterpreterPath\" = \"/opt/conda/bin/python\""
+patch_settings(){
+    SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false | .\"python.defaultInterpreterPath\" = \"/opt/conda/bin/python\" | .\"security.workspace.trust.enable\" = false" 
     if [ -e $CODE_SETTINGS ] 
     then
         cat $CODE_SETTINGS | jq "$SETTINGS" > $CODE_SETTINGS.tmp
@@ -24,6 +20,14 @@ if [ $INSTALLED_RELEASE -lt 1 ]; then
         mkdir -p ~/.local/share/code-server/User
         jq -n "$SETTINGS" > $CODE_SETTINGS
     fi
+}
+
+if [ -f  ~/.local/fingerprint ] ; then
+    INSTALLED_RELEASE=$(cat ~/.local/fingerprint)
+fi
+
+if [ $INSTALLED_RELEASE -lt 1 ]; then
+    patch_settings
 fi
 
 if [ $INSTALLED_RELEASE -lt 2 ]; then
@@ -43,5 +47,11 @@ if [ $INSTALLED_RELEASE -lt 4 ] && [ $INSTALLED_RELEASE -ne 0 ]; then
     code-server --install-extension ./hm.riscv-venus-1.7.0.vsix    
     rm hm.riscv-venus-1.7.0.vsix
 fi
+
+if [ $INSTALLED_RELEASE -lt 5 ] && [ $INSTALLED_RELEASE -ne 0 ]; then
+    patch_settings
+fi
+
+
 
 echo "$CURRENT_RELEASE" > ~/.local/fingerprint
