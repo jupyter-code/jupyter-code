@@ -11,7 +11,7 @@ CODE_SETTINGS=~/.local/share/code-server/User/settings.json
 INSTALLED_RELEASE="0"
 
 patch_settings(){
-    SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false | .\"python.defaultInterpreterPath\" = \"/opt/conda/bin/python\" | .\"security.workspace.trust.enable\" = false" 
+    SETTINGS=".\"files.exclude\".\"**/.*/\" = true | .\"telemetry.enableTelemetry\" = false | .\"python.defaultInterpreterPath\" = \"/opt/conda/bin/python\" | .\"security.workspace.trust.enabled\" = false" 
     if [ -e $CODE_SETTINGS ] 
     then
         cat $CODE_SETTINGS | jq "$SETTINGS" > $CODE_SETTINGS.tmp
