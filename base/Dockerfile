@@ -8,10 +8,10 @@ RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra 
 
 RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/lib/vscode/extensions && \
     mkdir -p ${CODE_BUILTIN_EXTENSIONS_DIR} && \
-    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python@2022.8.1 && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-toolsai.jupyter@2022.5.1001610507 && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens && \    
-    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-2022.5.1001610507 && mkdir -m 1777 tmp && \
+    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-2022.5.1001610507 && mkdir -m 1777 tmp && mkdir -m 1777 temp  && \
     rm -rf /home/jovyan/.cache/ && \
     rm -rf /home/jovyan/.local/share/code-server/CachedExtensionVSIXs
 
