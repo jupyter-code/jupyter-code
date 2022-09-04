@@ -8,7 +8,7 @@ RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra 
 
 RUN --mount=type=secret,id=github_token \
     TOKEN=$(cat /run/secrets/github_token) && \
-    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/coder/code-server/actions/artifacts/323166380/zip -O /tmp/release-package.zip && \
+    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/coder/code-server/actions/artifacts/351314141/zip -O /tmp/release-package.zip && \
     unzip /tmp/release-package.zip -d /tmp && \
     dpkg -i /tmp/code-server_*_amd64.deb && \
     rm -rf /tmp/* && \
@@ -20,7 +20,7 @@ RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/lib/vscode/extension
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-toolsai.jupyter && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens && \    
-    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-2022.8.1002170547 && mkdir -m 1777 tmp && mkdir -m 1777 temp  && \
+    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-2022.8.1002460559 && mkdir -m 1777 tmp && mkdir -m 1777 temp  && \
     rm /usr/lib/code-server/lib/vscode/bin/remote-cli/code-server && \
     rm -rf /home/jovyan/.cache/ && \
     rm -rf /home/jovyan/.local/share/code-server/CachedExtensionVSIXs
