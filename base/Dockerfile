@@ -6,11 +6,7 @@ RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra 
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /home/jovyan/.cache/
 
-RUN --mount=type=secret,id=github_token \
-    TOKEN=$(cat /run/secrets/github_token) && \
-    wget --header "authorization: Bearer $TOKEN" --quiet https://api.github.com/repos/fritterhoff/code-server/actions/artifacts/351314141/zip -O /tmp/release-package.zip && \
-    unzip /tmp/release-package.zip -d /tmp && \
-    dpkg -i /tmp/code-server_*_amd64.deb && \
+RUN curl -fsSL https://code-server.dev/install.sh | sh && \
     rm -rf /tmp/* && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /home/jovyan/.cache/
