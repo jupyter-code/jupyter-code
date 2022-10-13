@@ -15,8 +15,8 @@ RUN export CODE_BUILTIN_EXTENSIONS_DIR=/usr/lib/code-server/lib/vscode/extension
     mkdir -p ${CODE_BUILTIN_EXTENSIONS_DIR} && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-python.python && \
     code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension ms-toolsai.jupyter && \
-    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens && \    
-    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-2022.8.1002460559 && mkdir -m 1777 tmp && mkdir -m 1777 temp  && \
+    code-server --extensions-dir ${CODE_BUILTIN_EXTENSIONS_DIR} --install-extension eamodio.gitlens && \   
+    cd ${CODE_BUILTIN_EXTENSIONS_DIR}/ms-toolsai.jupyter-2022.8.1002460559-universal && mkdir -m 1777 tmp && mkdir -m 1777 temp  && \
     rm /usr/lib/code-server/lib/vscode/bin/remote-cli/code-server && \
     rm -rf /home/jovyan/.cache/ && \
     rm -rf /home/jovyan/.local/share/code-server/CachedExtensionVSIXs
