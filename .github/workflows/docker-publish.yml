@@ -8,8 +8,12 @@ name: Docker
 on:
   workflow_dispatch:
   push:
+    paths-ignore:
+      - ".github/renovate.json5"
+      - "README.md"
     branches: 
       - "main"
+      
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   workflow_run:
@@ -31,7 +35,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
