@@ -4,5 +4,5 @@ https://github.com/fritterhoff/livefeedback/archive/refs/heads/main.zip
 jupyter-vscode-proxy==0.1
 jupyterlab-git==0.41.0
 jupyter-server-proxy==3.2.2
-nbgitpuller==1.1.0
+nbgitpuller==1.1.1
 jupyter-archive
