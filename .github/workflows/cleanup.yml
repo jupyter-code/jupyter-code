@@ -9,7 +9,7 @@ jobs:
       contents: read
       packages: write
     steps:
-    - uses: snok/container-retention-policy@v1
+    - uses: snok/container-retention-policy@v2
       with:
         image-names: jupyter-code, jupyter-code-haskell, jupyter-code-rust, jupyter-code-go
         cut-off: Two hours ago UTC
