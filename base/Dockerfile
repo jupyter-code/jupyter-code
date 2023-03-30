@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:latest@sha256:022e3103bc657490d485300e199863e54902134e2caaed49610ca14599e56477
+FROM jupyter/scipy-notebook:latest@sha256:5e37c49f67ca941bb6bae132cc685f16a013b75098d528c01a2dccbd9e0696cf
 USER root
 
 RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra latexmk texlive-lang-german texlive-science direnv && \
