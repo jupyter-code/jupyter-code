@@ -1,5 +1,5 @@
 otter-grader==4.4.1
-roboworld==0.1.5
+roboworld==0.1.7
 https://github.com/fritterhoff/livefeedback/archive/refs/heads/main.zip
 jupyter-vscode-proxy==0.5
 jupyterlab-git==0.43.0
