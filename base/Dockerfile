@@ -1,4 +1,4 @@
-FROM jupyter/scipy-notebook:latest@sha256:bf4de44b0fa8a422ebc325e695d572d304bd290c055e028a6507921a294213bc
+FROM jupyter/scipy-notebook:lab-3.6.3
 USER root
 
 RUN sudo apt update && sudo apt install -y curl jq git make texlive-fonts-extra latexmk texlive-lang-german texlive-science direnv && \
@@ -34,7 +34,6 @@ COPY extensions /opt/extensions
 RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 
 USER ${NB_USER}
-ADD fixes/jupyter_vscode_proxy.py /opt/conda/lib/python3.10/site-packages/jupyter_vscode_proxy/__init__.py
-RUN jupyter labextension install @jupyterlab/git @jupyterlab/server-proxy && \
-    jupyter server extension enable --py jupyterlab_git jupyter_server_proxy livefeedback && \
+RUN pip install --upgrade "jupyterlab<4" jupyterlab-git jupyter-server-proxy && \
+    jupyter server extension enable --py jupyterlab_git jupyter_server_proxy && \
     rm -rf /home/jovyan/.cache/ 
