@@ -112,8 +112,8 @@ RUN dpkgArch="$(dpkg --print-architecture)" \
     tmux \
     vim-tiny \
     wget \
-    zsh \
-    ## Git: Additional runtime dependencies
+    vim \
+  ## Git: Additional runtime dependencies
     libcurl3-gnutls \
     liberror-perl \
     ## Git: Additional runtime recommendations
@@ -166,7 +166,7 @@ RUN dpkgArch="$(dpkg --print-architecture)" \
     sed -i 's/.*pam_limits.so/#&/g' /etc/pam.d/sudo-i; \
   fi \
   ## Add user
-  && useradd -l -m -s $(which zsh) -N -u ${NB_UID} ${NB_USER} \
+  && useradd -l -m -s $(which bash) -N -u ${NB_UID} ${NB_USER} \
   && mkdir -p /var/backups/skel \
   && chown ${NB_UID}:${NB_GID} /var/backups/skel \
   ## Install Tini
@@ -216,8 +216,8 @@ RUN export PIP_BREAK_SYSTEM_PACKAGES=1 \
     python-lsp-server[all] \
   ## Include custom fonts
   ## Clean up
-  && pip install --no-cache-dir -r /tmp/requirements.txt && \
-    cp /opt/conda/lib/python3.11/site-packages/nbgitpuller/templates/status.html /opt/conda/lib/python3.11/site-packages/notebook/templates/status.html \ 
+  && pip install --no-cache-dir -r /tmp/requirements.txt \
+  && cp /usr/local/lib/python3.11/site-packages/nbgitpuller/templates/status.html /usr/local/lib/python3.11/site-packages/notebook/templates/status.html \ 
   && rm -rf /tmp/* \
     ${HOME}/.cache
 COPY scripts /opt/scripts
@@ -227,7 +227,7 @@ RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 USER ${NB_USER}
 
 ENV HOME=/home/${NB_USER} \
-    CODE_WORKDIR=${CODE_WORKDIR:-/home/${NB_USER}/projects} \
+    CODE_WORKDIR=${CODE_WORKDIR:-/home/${NB_USER}} \
     TERM=xterm-256color
 
 WORKDIR ${HOME}

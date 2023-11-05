@@ -33,18 +33,6 @@ if [ "$(id -u)" == 0 ] ; then
     update-locale --reset LANG=$LANG
   fi
 
-  # Install user-specific startup files for Julia and IJulia
-  su $NB_USER -c "mkdir -p /home/$NB_USER/.julia/config"
-  if [[ ! -f "/home/$NB_USER/.julia/config/startup_ijulia.jl" ]]; then
-    su $NB_USER -c "cp ${CP_OPTS:--a} /var/backups/skel/.julia/config/startup_ijulia.jl \
-      /home/$NB_USER/.julia/config/startup_ijulia.jl"
-    chown :$NB_GID "/home/$NB_USER/.julia/config/startup_ijulia.jl"
-  fi
-  if [[ ! -f "/home/$NB_USER/.julia/config/startup.jl" ]]; then
-    su $NB_USER -c "cp ${CP_OPTS:--a} /var/backups/skel/.julia/config/startup.jl \
-      /home/$NB_USER/.julia/config/startup.jl"
-    chown :$NB_GID "/home/$NB_USER/.julia/config/startup.jl"
-  fi
 
   # Update code-server settings
   su $NB_USER -c "mkdir -p /home/$NB_USER/.local/share/code-server/User"
@@ -80,16 +68,7 @@ else
     LANG=en_US.UTF-8
   fi
 
-  # Install user-specific startup files for Julia and IJulia
-  mkdir -p /home/$NB_USER/.julia/config
-  if [[ ! -f "/home/$NB_USER/.julia/config/startup_ijulia.jl" ]]; then
-    cp -a /var/backups/skel/.julia/config/startup_ijulia.jl \
-      /home/$NB_USER/.julia/config/startup_ijulia.jl
-  fi
-  if [[ ! -f "/home/$NB_USER/.julia/config/startup.jl" ]]; then
-    cp -a /var/backups/skel/.julia/config/startup.jl \
-      /home/$NB_USER/.julia/config/startup.jl
-  fi
+
 
   # Update code-server settings
   mkdir -p /home/$NB_USER/.local/share/code-server/User
