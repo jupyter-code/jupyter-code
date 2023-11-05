@@ -217,7 +217,7 @@ RUN export PIP_BREAK_SYSTEM_PACKAGES=1 \
   ## Include custom fonts
   ## Clean up
   && pip install --no-cache-dir -r /tmp/requirements.txt && \
-    cp /opt/conda/lib/python3.11/site-packages/nbgitpuller/templates/status.html /opt/conda/lib/python3.11/site-packages/notebook/templates/status.html && \ 
+    cp /opt/conda/lib/python3.11/site-packages/nbgitpuller/templates/status.html /opt/conda/lib/python3.11/site-packages/notebook/templates/status.html \ 
   && rm -rf /tmp/* \
     ${HOME}/.cache
 COPY scripts /opt/scripts
