@@ -1,0 +1,34 @@
+{
+  "editor.tabSize": 2,
+  "gitlab.aiAssistedCodeSuggestions.enabled": false,
+  "gitlens.graph.statusBar.enabled": false,
+  "gitlens.menus": {
+    "scm": {
+      "graph": false
+    },
+    "scmRepositoryInline": {
+      "graph": false
+    },
+    "scmRepository": {
+      "graph": false
+    }
+  },
+  "gitlens.showWelcomeOnInstall": false,
+  "gitlens.showWhatsNewAfterUpgrades": false,
+  "julia.enableCrashReporter": false,
+  "julia.enableTelemetry": false,
+  "resmon.show.battery": false,
+  "resmon.show.cpufreq": false,
+  "telemetry.telemetryLevel": "off",
+  "security.workspace.trust.enabled": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/*.crswap": true,
+    "**/.*": true
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "@jupyter-lsp/jupyterlab-lsp:plugin": {
+    "language_servers": {
+      "pylsp": {
+        "serverSettings": {
+          "pylsp.plugins.pydocstyle.enabled": true,
+          "pylsp.plugins.pyflakes.enabled": false,
+          "pylsp.plugins.flake8.enabled": true
+        }
+      }
+    }
+  }
+}

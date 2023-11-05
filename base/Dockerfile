@@ -23,11 +23,10 @@ RUN mkdir /files
 
 COPY assets /files
 COPY conf/ipython /files
-COPY conf/julia /files/${JULIA_PATH}
 COPY conf/jupyter /files
 COPY conf/jupyterlab /files
 COPY conf/user /files
-COPY scripts /files
+COPY scripts/usr /files/usr
 
 RUN chown -R ${NB_UID}:${NB_GID} /files/var/backups/skel \
   ## Ensure file modes are correct when using CI
@@ -222,7 +221,9 @@ RUN export PIP_BREAK_SYSTEM_PACKAGES=1 \
     cp /opt/conda/lib/python3.11/site-packages/nbgitpuller/templates/status.html /opt/conda/lib/python3.11/site-packages/notebook/templates/status.html && \ 
   && rm -rf /tmp/* \
     ${HOME}/.cache
-
+COPY scripts /opt/scripts
+COPY extensions /opt/extensions
+RUN chmod 755 /opt/scripts/*.sh && chmod +x /opt/scripts/*.sh
 ## Switch back to ${NB_USER} to avoid accidental container runs as root
 USER ${NB_USER}
 
