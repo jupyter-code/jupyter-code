@@ -1,6 +1,6 @@
 otter-grader==5.2.2
 roboworld==0.1.7
 jupyterlab-git==0.44.0
-jupyter-server-proxy==4.1.0
+jupyter-server-proxy==4.2.0
 nbgitpuller==1.2.0
 jupyter-archive
